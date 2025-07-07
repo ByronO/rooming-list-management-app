@@ -1,0 +1,20 @@
+.scroll-x::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scroll-x::-webkit-scrollbar-track {
+  background: #E1E6F0;
+  border-radius: 10px;
+}
+
+.scroll-x::-webkit-scrollbar-thumb {
+  background-color: #BCC6DC;
+  border-radius: 10px;
+  border: none;
+}
+
+.scroll-x {
+  scrollbar-color: #BCC6DC #E1E6F0;
+  scrollbar-width: thin;
+}
+
