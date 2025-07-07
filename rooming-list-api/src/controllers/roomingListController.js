@@ -33,7 +33,8 @@ const getRoomingLists = async (req, res) => {
     const query = `
       SELECT rl.*, e.event_name,
         MIN(b.check_in_date) AS start_date,
-        MAX(b.check_out_date) AS end_date
+        MAX(b.check_out_date) AS end_date,
+        COUNT(DISTINCT b.booking_id) AS bookings_count
       FROM rooming_lists rl
       JOIN events e ON rl.event_id = e.event_id
       LEFT JOIN rooming_list_bookings rlb ON rl.rooming_list_id = rlb.rooming_list_id

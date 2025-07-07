@@ -23,6 +23,7 @@ const insertJsonData = async () => {
     await client.query('BEGIN');
 
     // Clean up existing data
+    await client.query('DELETE FROM events');
     await client.query('DELETE FROM rooming_list_bookings');
     await client.query('DELETE FROM bookings');
     await client.query('DELETE FROM rooming_lists');
@@ -31,6 +32,15 @@ const insertJsonData = async () => {
     const bookings = loadJson('bookings.json');
     const roomingLists = loadJson('rooming-lists.json');
     const roomingListBookings = loadJson('rooming-list-bookings.json');
+
+    //Insert events
+    for (const rl of roomingLists) {
+      await client.query(`
+        INSERT INTO events (event_id, event_name)
+        VALUES ($1, $2)
+        ON CONFLICT (event_id) DO NOTHING;
+      `, [rl.eventId, rl.eventName]);
+    }
 
     // Insert rooming_lists
     for (const rl of roomingLists) {
